@@ -1,14 +1,37 @@
 package com.udacity.gradle.builditbigger;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+
+import butterknife.BindView;
 
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements IdlingInterface{
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
+
+    /**
+     * Only called from test, creates and returns a new {@link SimpleIdlingResource}.
+     */
+    @VisibleForTesting
+    @NonNull
+    public SimpleIdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +61,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void tellJoke(View view) {
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
-    }
-
 
 }
