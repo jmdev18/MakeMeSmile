@@ -27,14 +27,14 @@ task startbackend {
     dependsOn = [":backend:appengineStart"]
 
     doLast {
-        println "KMM startbackend"
+        println " startbackend"
     }
 }
 
 task shutdownbackend {
     dependsOn = [":backend:appengineStop"]
     doLast {
-        println "KMM shutdownbackend"
+        println " shutdownbackend"
     }
 }
 
